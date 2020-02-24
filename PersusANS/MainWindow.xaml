@@ -1,0 +1,81 @@
+﻿<Window x:Class="PersusANS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersusANS"
+        mc:Ignorable="d"
+        Title="Envio de dados para o Persus na ANS" Height="800" Width="900" MinWidth="900" MinHeight="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="170" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Label     Grid.Row="1" Grid.Column="1" x:Name="lPastaPDF" Content="Pasta" VerticalAlignment="Top" />
+        <TextBox   Grid.Row="1" Grid.Column="2" x:Name="tPastaPDF"  TextWrapping="Wrap" Text="" Height="40" />
+        <Button    Grid.Row="1" Grid.Column="3" x:Name="bLocalizarPastaPDF"    Content=" Localizar pasta " Margin="10,0,0,0"  Style="{StaticResource BaseButtonStyle}" Click="bLocalizarPastaPDF_Click" />
+        
+        <Label     Grid.Row="3" Grid.Column="1" x:Name="lCertificado" Content="Certificado"  VerticalAlignment="Top" />
+        <ComboBox  Grid.Row="3" Grid.Column="2" x:Name="cCertificado"   VerticalAlignment="Top" Grid.ColumnSpan="2" Loaded="GetListaCertificados" />
+        
+        <Label     Grid.Row="5" Grid.Column="1" x:Name="lLocalAssinatura" Content="Local da assinatura"  VerticalAlignment="Top" />
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura1" Content="Superior esquerda"  Margin="0,0,0,0" VerticalAlignment="Top"   Grid.ColumnSpan="2" Checked="validaLocalAssinatura"/>
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura2" Content="Superior centro"  Margin="150,0,0,0" VerticalAlignment="Top"   Grid.ColumnSpan="2" Checked="validaLocalAssinatura"/>
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura3" Content="Superior direita"  Margin="300,0,0,0" VerticalAlignment="Top"  Grid.ColumnSpan="2" Checked="validaLocalAssinatura"/>
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura4" Content="Inferior esquerda"  Margin="0,25,0,0" VerticalAlignment="Top"  Grid.ColumnSpan="2" Checked="validaLocalAssinatura"/>
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura5" Content="Inferior centro"  Margin="150,25,0,0" VerticalAlignment="Top"  Grid.ColumnSpan="2" Checked="validaLocalAssinatura" IsChecked="True"/>
+        <RadioButton Grid.Row="5" Grid.Column="2" x:Name="localAssinatura6" Content="Inferior direita"  Margin="300,25,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Checked="validaLocalAssinatura"/>
+        <Button    Grid.Row="5" Grid.Column="3" x:Name="bAssinarDocumento"    Content=" Assinar documentos " Margin="10,0,0,0"  Style="{StaticResource BaseButtonStyle}" Click="bAssinarDocumento_Click"  />
+
+        <Label     Grid.Row="6" Grid.Column="2" x:Name="lTituloPersus" Content="Envio de dados para o Persus na ANS"  VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" />
+        <Label     Grid.Row="7" Grid.Column="1" x:Name="lPastaAssinados" Content="Pasta PDFs assinados"  VerticalAlignment="Top" />
+        <TextBox   Grid.Row="7" Grid.Column="2" x:Name="tPastaAssinados"  TextWrapping="Wrap" Text="" Height="40" />
+        <Button    Grid.Row="7" Grid.Column="3" x:Name="bLocalizarPastaAssinados"    Content=" Localizar pasta " Margin="10,0,0,0"  Style="{StaticResource BaseButtonStyle}" Click="bLocalizarPastaAssinados_Click"  />
+
+        <Label     Grid.Row="9" Grid.Column="1" x:Name="lPastaDocumentosComplementares" Content="Documentos complementares"  VerticalAlignment="Top" />
+        <TextBox   Grid.Row="9" Grid.Column="2" x:Name="tPastatDocumentosComplementares"  TextWrapping="Wrap" Text="" Height="40" />
+        <Button    Grid.Row="9" Grid.Column="3" x:Name="bLocalizarDocumentosComplementares"    Content=" Localizar pasta " Margin="10,0,0,0"  Style="{StaticResource BaseButtonStyle}" Height="40" VerticalAlignment="Top" Click="bLocalizarDocumentosComplementares_Click"  />
+
+        <Label     Grid.Row="11" Grid.Column="1" x:Name="lXMLABI" Content="XML ABI"  VerticalAlignment="Top" />
+        <TextBox   Grid.Row="11" Grid.Column="2" x:Name="tXMLABI"  TextWrapping="Wrap" Text="" Height="40" />
+        <Button    Grid.Row="11" Grid.Column="3" x:Name="bLocalizarXMLABI"    Content=" Localizar XML " Margin="10,0,0,0"  Style="{StaticResource BaseButtonStyle}" Height="40" VerticalAlignment="Top" Click="bLocalizarXMLABI_Click"  />
+
+        <Label     Grid.Row="13" Grid.Column="1" x:Name="lInstancia" Content="Instância"  VerticalAlignment="Top" />
+        <ComboBox  Grid.Row="13" Grid.Column="2" x:Name="cInstancia"   VerticalAlignment="Top" Grid.ColumnSpan="2" >
+            <ComboBoxItem Tag="1" IsSelected="True" >Primeira</ComboBoxItem>
+            <ComboBoxItem Tag="2">Segunda</ComboBoxItem>
+        </ComboBox>
+
+
+        <Label     Grid.Row="15" Grid.Column="1" x:Name="lResultado" Content="Resultado"  VerticalAlignment="Top" />
+        <TextBox   Grid.Row="15" Grid.Column="2" x:Name="tResultado" TextWrapping="Wrap" AcceptsReturn="True" Text=""  Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        <Button    Grid.Row="17" Grid.Column="3" x:Name="bEnviarDados" Content=" Enviar dados "  Style="{StaticResource BaseButtonStyle}" HorizontalAlignment="Right" Width="120" Click="bEnviarDados_Click" Height="30" VerticalAlignment="Bottom"/>
+        <Button    Grid.Row="17" Grid.Column="2" x:Name="bRelatorios" Content=" Visualizar relatórios "  Style="{StaticResource BaseButtonStyle}" HorizontalAlignment="left" Width="120" Click="bRelatorios_Click" />
+    </Grid>
+</Window>
